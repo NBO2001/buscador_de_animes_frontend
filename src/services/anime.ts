@@ -14,6 +14,7 @@ export const search = async (query: string) => {
     
     return data;
   } catch (err) {
+    console.error(err)
     return [];
   }
 };

@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Box, Container, IconButton, InputBase, Paper } from '@mui/material';
+import  { useState } from 'react';
+import {  Container, IconButton, InputBase, Paper } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import { search } from './services/anime';
 import { AnimeCard } from './components/AnimeCard/AnimeCard';
@@ -11,10 +11,8 @@ function App() {
 
   const handleSearch = async (e: any) => {
     e.preventDefault();
-    
     const animes_ = await search(inputAnime);
     setAnimes(animes_);
-    console.log(animes_)
   }
 
   return (
