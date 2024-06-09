@@ -20,7 +20,7 @@ export const AnimeCard = ({ anime }: IAnimeCard) => {
             image={anime.main_pic}
             alt={anime.title}
           />
-          <Box sx={{ display: 'flex', flexDirection: 'column', m: 2, maxWidth: "60vw" }}>
+          <Box sx={{ display: 'flex', flexDirection: 'column', m: 2, width: "60vw" }}>
             <Typography variant="h6" component="div">
               {anime.title}
             </Typography>
@@ -39,7 +39,7 @@ export const AnimeCard = ({ anime }: IAnimeCard) => {
           image={anime.main_pic}
           alt={anime.title}
         />
-        <Box sx={{ display: 'flex', flexDirection: 'column', m: 2, maxWidth: "60vw" }}>
+        <Box sx={{ display: 'flex', flexDirection: 'column', m: 2, width: "60vw" }}>
           <Typography gutterBottom variant="h5" component="div">
             {anime.title}
           </Typography>
