@@ -1,26 +1,47 @@
-import { Box, Card, CardActionArea, CardActions, CardMedia, IconButton, Typography, useMediaQuery } from "@mui/material";
+import {
+  Box,
+  Card,
+  CardActionArea,
+  CardActions,
+  CardMedia,
+  Typography,
+  useMediaQuery,
+} from "@mui/material";
 import { TAnimeSimplified } from "../../types/anime.type";
-import FavoriteIcon from '@mui/icons-material/Favorite';
 import { generSplit } from "../../utils/genreSplit";
+import StarRatings from "react-star-ratings";
 
 export interface IAnimeCard {
   anime: TAnimeSimplified;
-};
+}
 
 export const AnimeCard = ({ anime }: IAnimeCard) => {
-  const isMobile = useMediaQuery('(max-width:600px)');
+  const isMobile = useMediaQuery("(max-width:600px)");
 
   if (isMobile) {
     return (
       <Card sx={{ m: 1 }}>
-        <CardActionArea sx={{ display: 'flex', justifyContent: "start", alignItems: "center" }}>
+        <CardActionArea
+          sx={{
+            display: "flex",
+            justifyContent: "start",
+            alignItems: "center",
+          }}
+        >
           <CardMedia
             sx={{ width: "100px", height: "100px" }}
             component="img"
             image={anime.main_pic}
             alt={anime.title}
           />
-          <Box sx={{ display: 'flex', flexDirection: 'column', m: 2, width: "60vw" }}>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              m: 2,
+              width: "60vw",
+            }}
+          >
             <Typography variant="h6" component="div">
               {anime.title}
             </Typography>
@@ -32,14 +53,18 @@ export const AnimeCard = ({ anime }: IAnimeCard) => {
 
   return (
     <Card sx={{ m: 1 }}>
-      <CardActionArea sx={{ display: 'flex', justifyContent: "start", alignItems: "center" }}>
+      <CardActionArea
+        sx={{ display: "flex", justifyContent: "start", alignItems: "center" }}
+      >
         <CardMedia
           sx={{ width: "225px", height: "320px" }}
           component="img"
           image={anime.main_pic}
           alt={anime.title}
         />
-        <Box sx={{ display: 'flex', flexDirection: 'column', m: 2, width: "60vw" }}>
+        <Box
+          sx={{ display: "flex", flexDirection: "column", m: 2, width: "60vw" }}
+        >
           <Typography gutterBottom variant="h5" component="div">
             {anime.title}
           </Typography>
@@ -52,10 +77,15 @@ export const AnimeCard = ({ anime }: IAnimeCard) => {
         </Box>
       </CardActionArea>
       <CardActions>
-        <IconButton>
-          <FavoriteIcon fontSize="large" color="primary" />
-        </IconButton>
+        <StarRatings
+          rating={Number(anime.score)}
+          starRatedColor="gold"
+          numberOfStars={10}
+          name="rating"
+          starDimension="24px"
+          starSpacing="2px"
+        />
       </CardActions>
     </Card>
   );
-}
+};
