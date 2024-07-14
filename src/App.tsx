@@ -16,12 +16,14 @@ import * as React from "react";
 import { alpha } from "@mui/material";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
+import { addLog } from "./services/log";
 
 function App() {
   const [inputAnime, setInputAnime] = useState("");
   const [animes, setAnimes] = useState<TAnimeSimplified[] | null>(null);
   const [pages, setPages] = useState<number>(0);
   const [currentPage, setCurrentPage] = useState<number>(1);
+  const [ nowQuery, setNowQuery ] = useState("");
 
   const handleSearch = async (page: number = 1) => {
     const from = (page - 1) * 10;
@@ -33,6 +35,18 @@ function App() {
     setPages(
       Math.ceil(animes_.total / 10) < 10 ? Math.ceil(animes_.total / 10) : 10
     );
+    setNowQuery(inputAnime);
+
+    const ids = animes_?.animes?.map( (anime) => anime.anime_id);
+
+    const documents = ids?.join("|")
+
+    const log =  new Date().toISOString() + ";Search.viewed;" + inputAnime + ";" + documents;
+    await addLog(log);
+    console.log(log);
+    
+    
+
     setCurrentPage(page);
   };
 
@@ -47,6 +61,8 @@ function App() {
   ) => {
     handleSearch(page);
   };
+
+
 
   return (
     <>
@@ -145,7 +161,7 @@ function App() {
         >
           {animes &&
             animes.map((anime: TAnimeSimplified) => (
-              <AnimeCard key={anime.anime_id} anime={anime} />
+              <AnimeCard key={anime.anime_id} anime={anime} query={nowQuery}/>
             ))}
 
           {animes && (
