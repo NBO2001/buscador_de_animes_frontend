@@ -23,8 +23,8 @@ export const search = async ({query, from}: ISearch) => {
       },
       timeout: 5000 
     });
-    
     const data_: IResposeAnimeRead = data;
+    
     return data_;
 
   } catch (err) {

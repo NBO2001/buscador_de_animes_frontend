@@ -26,19 +26,19 @@ function App() {
   const [ nowQuery, setNowQuery ] = useState("");
 
   const handleSearch = async (page: number = 1) => {
-    const from = (page - 1) * 10;
+    const from = (page - 1) * 5;
     const animes_: IResposeAnimeRead = await search({
       query: inputAnime,
       from,
     });
+    
     setAnimes(animes_.animes);
     setPages(
-      Math.ceil(animes_.total / 10) < 10 ? Math.ceil(animes_.total / 10) : 10
+      Math.ceil(animes_.total / 5) < 5 ? Math.ceil(animes_.total / 5) : 5
     );
     setNowQuery(inputAnime);
 
     const ids = animes_?.animes?.map( (anime) => anime.anime_id);
-
     const documents = ids?.join("|")
 
     const log =  new Date().toISOString() + ";Search.viewed;" + inputAnime + ";" + documents;
